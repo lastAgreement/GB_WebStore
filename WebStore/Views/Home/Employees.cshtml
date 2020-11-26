@@ -11,16 +11,20 @@
 <table>
     <thead>
         <tr>
-            <th>id</th>
-            <th>Name</th>
+            <th>FirstName</th>
+            <th>LastName</th>
+            <th>Age</th>
+            <th>Link</th>
         </tr>
     </thead>
     <tbody>
         @foreach(var emp in Model)
         {
         <tr>
-            <td>@emp.Id</td>
-            <td>@emp.Name</td>
+            <td>@emp.FirstName</td>
+            <td>@emp.LastName</td>
+            <td>@emp.Age</td>
+            <td>@Html.ActionLink("Детали", "Details", new { id = emp.Id })</td>
         </tr>
         }
     </tbody>

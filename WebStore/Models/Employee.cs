@@ -8,11 +8,11 @@ namespace WebStore.Models
     public class Employee
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public Employee(int id, string name)
-        {
-            Id = id;
-            Name = name;
-        }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Phone { get; set; }
+        public string Email { get; set; }
+        public string Notes { get; set; }
+        public int Age { get; set; }
     }
 }
