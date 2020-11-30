@@ -11,12 +11,7 @@ namespace WebStore.Controllers
     public class HomeController : Controller
     {
         private readonly IConfiguration _Configuration;
-        private static List<Employee> __Employees = new List<Employee>()
-        {
-            new Employee {Id = 1, FirstName ="Иван", LastName = "Палочкин", Age =24, Email = "ip@gmail.com", Phone = "79153651526", Notes = "грубиян (" },
-            new Employee {Id = 2, FirstName ="Анна", LastName = "Каренина", Age = 29, Email = "carenina@gmail.com", Phone = "79261512515", Notes = "инстаграмм @carenina" },
-            new Employee {Id = 3, FirstName ="Михаил", LastName = "Подвойский", Age = 35, Email = "zubrra@gmail.com", Phone = "79295123748", Notes = "" }
-        };
+        
         public HomeController(IConfiguration configuration)
         {
             _Configuration = configuration;
@@ -26,15 +21,41 @@ namespace WebStore.Controllers
         {
             return View();
         }
-
-        public IActionResult Employees()
+        public IActionResult Shop()
         {
-            return View(__Employees);
+            return View();
         }
-
-        public IActionResult Details(int id)
+        public IActionResult ProductDetails()
         {
-            return View(__Employees.Where(x => x.Id == id).First());
+            return View();
+        }
+        public IActionResult Login()
+        {
+            return View();
+        }
+        public IActionResult ContactUs()
+        {
+            return View();
+        }
+        public IActionResult Checkout()
+        {
+            return View();
+        }
+        public IActionResult Cart()
+        {
+            return View();
+        }
+        public IActionResult BlogSingle()
+        {
+            return View();
+        }
+        public IActionResult Blog()
+        {
+            return View();
+        }
+        public IActionResult NotFound()
+        {
+            return View();
         }
     }
 }

@@ -8,7 +8,7 @@
     <title>Index</title>
 </head>
 <body>
-    <table>
+    <table class="table">
         <thead>
             <tr>
                 <th>Key</th>
@@ -43,6 +43,6 @@
         </tbody>
     </table>
     <br />
-    <a href='/Home/Employees'> Обратно</a>.
+    @Html.ActionLink("Обратно", "Index", null)
 </body>
 </html>
