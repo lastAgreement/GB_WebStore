@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebStore.Infrastructure.Interfaces;
+using WebStore.Infrastructure.Services;
 
 namespace WebStore
 {
@@ -24,6 +26,7 @@ namespace WebStore
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,6 +39,7 @@ namespace WebStore
 
             app.UseStaticFiles();
             app.UseRouting();
+            app.UseWelcomePage("/welcome") ;
 
             app.UseEndpoints(endpoints =>
             {
