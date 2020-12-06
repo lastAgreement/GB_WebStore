@@ -39,6 +39,8 @@ namespace WebStore.Controllers
         [HttpPost]
         public IActionResult Edit(EmployeeView Model)
         {
+            if (!ModelState.IsValid) return View(Model);
+
             if (Model is null)
                 throw new ArgumentNullException(nameof(Model));
             //!

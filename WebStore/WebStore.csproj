@@ -9,10 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="Views\Shared\Partial\Pages\_CategoryProducts.cshtml">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
+    <ProjectReference Include="..\WebStore.Domain\WebStore.Domain.csproj" />
   </ItemGroup>
 
 </Project>

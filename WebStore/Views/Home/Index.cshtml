@@ -1,19 +1,31 @@
-﻿
+﻿@using WebStore.Infrastructure.Interfaces
+@inject IProductData ProductData
+@{
+    var products = ProductData
+        .GetProducts()
+        .OrderBy(p => p.Order)
+        .Take(6)
+        .Select(p => new ProductViewModel
+        {
+            Id = p.Id,
+            Name = p.Name,
+            Price = p.Price,
+            ImageUrl = p.ImageUrl
+        });
+}
 <partial name="Partial/_Slider" />
 <section>
     <div class="container">
         <div class="row">
             <div class="col-sm-3">
                 <div class="left-sidebar">
-                    <h2>Category</h2>
-
-                    <partial name="Partial/Pages/_CategoryProducts" />
+                    <partial name="Partial/Pages/_LeftSideBar" />
 
                 </div>
             </div>
 
             <div class="col-sm-9 padding-right">
-                <partial name="Partial/Pages/_FeaturesItems" />
+                <partial name="Partial/Pages/_FeaturesItems" model="products" />
                 <partial name="Partial/Pages/_CategoryTab" />
                 <partial name="Partial/Pages/_RecommendedItems" />
 
