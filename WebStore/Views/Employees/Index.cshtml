@@ -1,23 +1,24 @@
-﻿@model IEnumerable<WebStore.Models.Employee>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>FirstName</th>
-            <th>LastName</th>
-            <th>Age</th>
-            <th>Link</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach(var emp in Model)
-        {
-        <tr>
-            <td>@emp.FirstName</td>
-            <td>@emp.LastName</td>
-            <td>@emp.Age</td>
-            <td>@Html.ActionLink("Детали", "Details", new { id = emp.Id })</td>
-        </tr>
-        }
-    </tbody>
-</table>
+﻿@model IEnumerable<Employee>
+@{
+    ViewData["Title"] = "Список сотрудников";
+}
+<hr/>
+<a asp-action="Edit" class="btn btn-success">Добавить</a>
+<hr/>
+    
+    <table class="table table-bordered">
+        <tbody>
+            @foreach (var emp in Model)
+            {
+            <tr>
+                <td><a asp-action="Edit" asp-route-id="@emp.Id"><i class="fa fa-edit"> </i></a></td>
+                <td>@emp.FirstName</td>
+                <td>@emp.LastName</td>
+                <td>@emp.Age</td>
+                <td>@Html.ActionLink("Детали", "Details", new { id = emp.Id })</td>
+                <td>
+                <a asp-action="Delete" asp-route-id=" @emp.Id"><i class="fa fa-cut"></i></a></td>
+            </tr>
+            }
+        </tbody>
+    </table>

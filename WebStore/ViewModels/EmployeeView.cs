@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WebStore.ViewModels;
+using WebStore.Models;
 
-namespace WebStore.Models
+namespace WebStore.ViewModels
 {
-    public class Employee
+    public class EmployeeView
     {
         public int Id { get; set; }
         public string FirstName { get; set; }
@@ -15,19 +15,10 @@ namespace WebStore.Models
         public string Email { get; set; }
         public string Notes { get; set; }
         public int Age { get; set; }
-        public Employee() { }
-        public Employee(EmployeeView employee)
+        public EmployeeView() { }
+        public EmployeeView(Employee employee)
         {
             Id = employee.Id;
-            FirstName = employee.FirstName;
-            LastName = employee.LastName;
-            Phone = employee.Phone;
-            Email = employee.Email;
-            Notes = employee.Notes;
-            Age = employee.Age;
-        }
-        public void SetValuesFrom(Employee employee)
-        {
             FirstName = employee.FirstName;
             LastName = employee.LastName;
             Phone = employee.Phone;
