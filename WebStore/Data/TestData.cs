@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebStore.ViewModels;
 using WebStore.Models;
-using WebStore.Domain.Entityes;
+using WebStore.Domain.Entities;
 
 namespace WebStore
 {
