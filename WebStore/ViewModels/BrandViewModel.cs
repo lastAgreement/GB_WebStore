@@ -1,4 +1,4 @@
-﻿using WebStore.Domain.Entityes.Base.Interfaces;
+﻿using WebStore.Domain.Entities.Base.Interfaces;
 
 namespace WebStore.ViewModels
 {
@@ -9,5 +9,7 @@ namespace WebStore.ViewModels
         public string Name { get; set; }
 
         public int Order { get; set; }
+
+        public int ProductsCount { get; set; }
     }
 }
