@@ -16,21 +16,38 @@ namespace WebStore.Infrastructure.Services
 
         public SqlProductData(WebStoreDB db) =>_db = db;
 
-        public IEnumerable<Brand> GetBrands() => _db.Brands.Include(brand => brand.Products);
+        public Brand GetBrandById(int id) => _db.Brands.Include(b => b.Products).FirstOrDefault(b => b.Id == id);
+
+        public IEnumerable<Brand> GetBrands() => _db.Brands.Include(b => b.Products);
+
+
+        public Section GetSectionById(int id) => _db.Sections.Include(s => s.Products).FirstOrDefault(s => s.Id == id);
+
+        public IEnumerable<Section> GetSections() => _db.Sections.Include(s => s.Products);
+
+
+        public Product GetProductById(int id) => _db.Products
+            .Include(p => p.Section)
+            .Include(p => p.Brand)
+            .FirstOrDefault(p => p.Id == id);
 
         public IEnumerable<Product> GetProducts(ProductFilter Filter = null)
         {
             IQueryable<Product> query = _db.Products;
 
-            if(Filter?.BrandId != null)
-                query = query.Where(product => product.BrandId == Filter.BrandId);
+            if (Filter?.Ids?.Length > 0)
+            {
+                query = query.Where(product =>Filter.Ids.Contains(product.Id));
+            }
+            else
+            {
+                if (Filter?.BrandId != null)
+                    query = query.Where(product => product.BrandId == Filter.BrandId);
 
-            if (Filter?.SectionId != null)
-                query = query.Where(product => product.SectionId == Filter.SectionId);
-
+                if (Filter?.SectionId != null)
+                    query = query.Where(product => product.SectionId == Filter.SectionId);
+            }
             return query;
         }
-
-        public IEnumerable<Section> GetSections() => _db.Sections.Include(section => section.Products);
     }
 }
