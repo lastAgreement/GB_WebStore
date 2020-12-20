@@ -49,6 +49,9 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id"> <i class="fa fa-edit"></i> Редактировать</a> | 
+    @if (User.IsInRole(Role.Administrator))
+    {
+        <a asp-action="Edit" asp-route-id="@Model.Id"> <i class="fa fa-edit"></i> Редактировать</a> 
+    }
     <a asp-action="Index">Обратно</a>
 </div>
