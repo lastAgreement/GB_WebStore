@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using WebStore.Domain;
 using WebStore.Domain.Entities;
@@ -6,6 +7,7 @@ using WebStore.Infrastructure.Interfaces;
 
 namespace WebStore.Infrastructure.Services
 {
+    [Obsolete("Перешли на данные в БД. Следует использовать SqlProductData.", true)]
     public class InMemoryProductData : IProductData
     {
         public IEnumerable<Section> GetSections() => TestData.Sections;
@@ -23,6 +25,27 @@ namespace WebStore.Infrastructure.Services
                 query = query.Where(product => product.BrandId == Filter.BrandId);
 
             return query;
+        }
+
+        public Section GetSectionById(int id) => throw new NotSupportedException();
+
+        public Brand GetBrandById(int id) => throw new NotSupportedException();
+
+        public Product GetProductById(int id) => throw new NotSupportedException();
+
+        void IProductData.Add(Product product)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IProductData.Update(Product product)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IProductData.Delete(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

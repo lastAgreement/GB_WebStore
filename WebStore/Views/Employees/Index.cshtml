@@ -2,23 +2,36 @@
 @{
     ViewData["Title"] = "Список сотрудников";
 }
-<hr/>
-<a asp-action="Edit" class="btn btn-success">Добавить</a>
-<hr/>
-    
-    <table class="table table-bordered">
-        <tbody>
-            @foreach (var emp in Model)
+
+@if (User.IsInRole(Role.Administrator))
+{
+    <hr />
+    <a asp-action="Edit" class="btn btn-success">Добавить</a>
+    <hr />
+}
+
+
+
+<table class="table table-bordered">
+    <tbody>
+        @foreach (var emp in Model)
+        {
+        <tr>
+            @if (User.IsInRole(Role.Administrator))
             {
-            <tr>
                 <td><a asp-action="Edit" asp-route-id="@emp.Id"><i class="fa fa-edit"> </i></a></td>
-                <td>@emp.FirstName</td>
-                <td>@emp.LastName</td>
-                <td>@emp.Age</td>
-                <td>@Html.ActionLink("Детали", "Details", new { id = emp.Id })</td>
-                <td>
-                <a asp-action="Delete" asp-route-id=" @emp.Id"><i class="fa fa-cut"></i></a></td>
-            </tr>
             }
-        </tbody>
-    </table>
+            <td>@emp.FirstName</td>
+            <td>@emp.LastName</td>
+            <td>@emp.Age</td>
+            <td>@Html.ActionLink("Детали", "Details", new { id = emp.Id })</td>
+            @if (User.IsInRole(Role.Administrator))
+            {
+                <td>
+                    <a asp-action="Delete" asp-route-id=" @emp.Id"><i class="fa fa-cut"></i></a>
+                </td>
+            }
+        </tr>
+        }
+    </tbody>
+</table>

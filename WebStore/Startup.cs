@@ -11,6 +11,7 @@ using WebStore.Data;
 using WebStore.Domain.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
 using System;
+using WebStore.Infrastructure.Services.InCookies;
 
 namespace WebStore
 {
@@ -41,8 +42,8 @@ namespace WebStore
                 opt.Password.RequiredUniqueChars = 3;
 #endif
                 opt.User.RequireUniqueEmail = false;
-                opt.User.AllowedUserNameCharacters = "abcdefghjklmnopqrstuvwxyz";
-
+                opt.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+/";
+                
                 opt.Lockout.AllowedForNewUsers = true;
                 opt.Lockout.MaxFailedAccessAttempts = 10;
                 opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
@@ -67,6 +68,8 @@ namespace WebStore
             services.AddTransient<IEmployeesData, InMemoryEmployeesData>();
             //services.AddSingleton<IProductData, InMemoryProductData>();
             services.AddTransient<IProductData, SqlProductData>();
+            services.AddScoped<ICartService, InCookiesCartService>();
+            services.AddScoped<IOrderService, SqlOrderData>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, WebStoreDbInitializer db)
@@ -84,9 +87,16 @@ namespace WebStore
             app.UseAuthentication();
             app.UseAuthorization();
 
+          
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}"); 
+                endpoints.MapControllerRoute(
+                   name: "areas",
+                   pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

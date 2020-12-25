@@ -240,6 +240,66 @@ namespace WebStore.DAL.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("WebStore.Domain.Entities.Order.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("WebStore.Domain.Entities.Order.OrderItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int?>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("OrderItems");
+                });
+
             modelBuilder.Entity("WebStore.Domain.Entities.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -350,6 +410,32 @@ namespace WebStore.DAL.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("WebStore.Domain.Entities.Order.Order", b =>
+                {
+                    b.HasOne("WebStore.Domain.Entities.Identity.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("WebStore.Domain.Entities.Order.OrderItem", b =>
+                {
+                    b.HasOne("WebStore.Domain.Entities.Order.Order", "Order")
+                        .WithMany("Items")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebStore.Domain.Entities.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId");
+
+                    b.Navigation("Order");
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("WebStore.Domain.Entities.Product", b =>
                 {
                     b.HasOne("WebStore.Domain.Entities.Brand", "Brand")
@@ -379,6 +465,11 @@ namespace WebStore.DAL.Migrations
             modelBuilder.Entity("WebStore.Domain.Entities.Brand", b =>
                 {
                     b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("WebStore.Domain.Entities.Order.Order", b =>
+                {
+                    b.Navigation("Items");
                 });
 
             modelBuilder.Entity("WebStore.Domain.Entities.Section", b =>
