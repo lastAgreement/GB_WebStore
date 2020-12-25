@@ -32,5 +32,20 @@ namespace WebStore.Infrastructure.Services
         public Brand GetBrandById(int id) => throw new NotSupportedException();
 
         public Product GetProductById(int id) => throw new NotSupportedException();
+
+        void IProductData.Add(Product product)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IProductData.Update(Product product)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IProductData.Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

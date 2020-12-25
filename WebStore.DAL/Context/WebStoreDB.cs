@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using WebStore.Domain.Entities;
 using WebStore.Domain.Entities.Identity;
+using WebStore.Domain.Entities.Order;
 
 namespace WebStore.DAL.Context
 {
@@ -10,14 +11,14 @@ namespace WebStore.DAL.Context
         public DbSet<Product> Products { get; set; }
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Section> Sections { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
 
         public WebStoreDB(DbContextOptions options) :base (options)  {}
 
         //protected override void OnModelCreating(ModelBuilder modelBuilder)
         //{
         //    base.OnModelCreating(modelBuilder);
-
-
         //}
     }
 }

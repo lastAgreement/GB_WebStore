@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using WebStore.Domain.Entities;
+using WebStore.Infrastructure.Services;
 using WebStore.ViewModels;
 
 namespace WebStore.Infrastructure.Mapping

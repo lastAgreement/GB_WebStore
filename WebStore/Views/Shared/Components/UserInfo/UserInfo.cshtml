@@ -2,10 +2,10 @@
     <ul class="nav navbar-nav">
         @if (User.IsInRole(Role.Administrator))
         {
-            <li><a href="#"></a><i class="fa fa-keyboard-o"></i> Админка</li>
+            <li><a asp-area="Admin" asp-controller="Home" asp-action="Index"><i class="fa fa-keyboard-o"></i> Админка</a></li>
         }
-        <li><a asp-controller="Home" asp-action="Account"><i class="fa fa-user"></i> @User.Identity!.Name</a></li>
-        <li><a asp-controller="Home" asp-action="Checkout"><i class="fa fa-crosshairs"></i> Заказы</a></li>
+        <li><a asp-controller="UserProfile" asp-action="Index"><i class="fa fa-user"></i> @User.Identity!.Name</a></li>
+        <li><a asp-controller="UserProfile" asp-action="Orders"><i class="fa fa-crosshairs"></i> Заказы</a></li>
         <li><a asp-controller="Cart" asp-action="Index"><i class="fa fa-shopping-cart"></i> Корзина</a></li>
         <li><a asp-controller="Account" asp-action="Logout"><i class="fa fa-lock"></i> Выход</a></li>
     </ul>

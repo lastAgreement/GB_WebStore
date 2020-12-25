@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using WebStore.DAL.Context;
 using WebStore.Domain;
 using WebStore.Domain.Entities;
@@ -48,6 +47,24 @@ namespace WebStore.Infrastructure.Services
                     query = query.Where(product => product.SectionId == Filter.SectionId);
             }
             return query;
+        }
+
+        void IProductData.Add(Product product)
+        {
+            _db.Products.Add(product);
+            _db.SaveChanges();
+        }
+
+        void IProductData.Update(Product product)
+        {
+            _db.Products.Update(product);
+            _db.SaveChanges();
+        }
+
+        void IProductData.Delete(int id)
+        {
+            _db.Products.Remove(GetProductById(id));
+            _db.SaveChanges();
         }
     }
 }
